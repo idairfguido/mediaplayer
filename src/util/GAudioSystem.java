@@ -14,7 +14,7 @@ import static util.comp.Constants.*;
  *
  * @author Idair F. Guido
  */
-public class AudioSistem {
+public class GAudioSystem {
      /** Porta Selecionada */
     private  Port[] port = new Port[2];
     /** Controle selecionado para a porta de volume */
@@ -48,7 +48,7 @@ public class AudioSistem {
 
     private int circBufMillis;
 
-    public AudioSistem() {
+    public GAudioSystem() {
 	portNames[0] = new ArrayList<String>();
 	portNames[1] = new ArrayList<String>();
 	ports[0] = new ArrayList<Port>();

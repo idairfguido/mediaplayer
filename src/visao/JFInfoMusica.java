@@ -21,11 +21,11 @@ import util.PlanoDeFundo;
  *
  * @author Idair F. Guido
  */
-public class InfoMusica extends javax.swing.JFrame {
+public class JFInfoMusica extends javax.swing.JFrame {
     private Musica musica;
 
     /** Creates new form InfoMusica */
-    public InfoMusica(Musica musica) {
+    public JFInfoMusica(Musica musica) {
         setaIcon();
         initComponents();
         this.musica = musica;
@@ -175,8 +175,8 @@ public class InfoMusica extends javax.swing.JFrame {
                 .addComponent(jbOk))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-350)/2, (screenSize.height-406)/2, 350, 406);
+        setSize(new java.awt.Dimension(350, 406));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOkActionPerformed

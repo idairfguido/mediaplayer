@@ -25,12 +25,12 @@ import modelo.PlayList;
 import persistencia.AlbumDAO;
 import persistencia.ListaDAO;
 import persistencia.MusicaDAO;
-import util.AudioSistem;
-import visao.InfoMusica;
-import visao.Opcoes;
-import visao.Sobre;
-import visao.TelaMiniPlayer;
-import visao.TelaPrincipal;
+import util.GAudioSystem;
+import visao.JFInfoMusica;
+import visao.JFOpcoes;
+import visao.JFSobre;
+import visao.JFTelaMiniPlayer;
+import visao.JFTelaPrincipal;
 
 /**
  *
@@ -39,8 +39,8 @@ import visao.TelaPrincipal;
 public class MediaPlayer {
 
     private List<File> listaArquivos;
-    private TelaPrincipal telaPrincipal = null;
-    private TelaMiniPlayer telaMiniPlayer;
+    private JFTelaPrincipal telaPrincipal = null;
+    private JFTelaMiniPlayer telaMiniPlayer;
     private List<Musica>  playlist = new LinkedList<Musica>();
     private Musica musica = null;
     private Mp3 musicaEstanciada;
@@ -58,7 +58,7 @@ public class MediaPlayer {
     public List<PlayList> listas;
     public PlayList listaExecutando = null;
 
-    public AudioSistem volume = new AudioSistem();
+    public GAudioSystem volume = new GAudioSystem();
 
     public static void main(String[] args) {
         new MediaPlayer();
@@ -187,7 +187,7 @@ public class MediaPlayer {
 
     public void estanciaTelaPrincipal() {
         if (telaPrincipal == null) {
-            telaPrincipal = new TelaPrincipal(this);
+            telaPrincipal = new JFTelaPrincipal(this);
             telaPrincipal.setVisible(true);
         } else {
             telaPrincipal.setVisible(true);
@@ -200,25 +200,25 @@ public class MediaPlayer {
     }
 
     public void estanciaOpcoes(){
-        Opcoes opcoes = new Opcoes(this);
+        JFOpcoes opcoes = new JFOpcoes(this);
         opcoes.setVisible(true);
     }
 
     public void esstanciaInformacoesMusica(){
         if(musica != null){
-            InfoMusica info = new InfoMusica(musica);
+            JFInfoMusica info = new JFInfoMusica(musica);
             info.setVisible(true);
         }
     }
 
     public void estanciaSobre(){
-        Sobre sobre = new Sobre();
+        JFSobre sobre = new JFSobre();
         sobre.setVisible(true);
     }
 
     public void estanciaMiniPlayer() {
         if (telaMiniPlayer == null) {
-            telaMiniPlayer = new TelaMiniPlayer(this);
+            telaMiniPlayer = new JFTelaMiniPlayer(this);
             telaMiniPlayer.setVisible(true);
         } else {
             telaMiniPlayer.setVisible(true);

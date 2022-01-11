@@ -30,12 +30,12 @@ import util.PlanoDeFundo;
  *
  * @author Idair F. Guido
  */
-public class TelaMiniPlayer extends javax.swing.JFrame {
+public class JFTelaMiniPlayer extends javax.swing.JFrame {
 
     private MediaPlayer player;
 
     /** Creates new form TelaMiniPlayer */
-    public TelaMiniPlayer(MediaPlayer player) {
+    public JFTelaMiniPlayer(MediaPlayer player) {
         this.player = player;
         setaIcon();
         initComponents();
@@ -83,16 +83,16 @@ public class TelaMiniPlayer extends javax.swing.JFrame {
             }
         });
 
-        jlDuracao.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jlDuracao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlDuracao.setForeground(new java.awt.Color(204, 255, 255));
         jlDuracao.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        jlAlbum.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jlAlbum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlAlbum.setForeground(new java.awt.Color(204, 255, 255));
         jlAlbum.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlAlbum.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
 
-        jlMusica.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jlMusica.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlMusica.setForeground(new java.awt.Color(204, 255, 255));
         jlMusica.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
@@ -169,7 +169,7 @@ public class TelaMiniPlayer extends javax.swing.JFrame {
                 .addComponent(jsProgresso, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jsVolume, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jsVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(jbTelaPrincipal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jbPlayPause, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,8 +208,8 @@ public class TelaMiniPlayer extends javax.swing.JFrame {
                 .addComponent(jpControl, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-265)/2, (screenSize.height-227)/2, 265, 227);
+        setSize(new java.awt.Dimension(265, 227));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -253,11 +253,11 @@ public class TelaMiniPlayer extends javax.swing.JFrame {
                     player.play(player.getNroMusicaExecutando());
             }
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbPlayPauseActionPerformed
 
@@ -266,11 +266,11 @@ public class TelaMiniPlayer extends javax.swing.JFrame {
             if(!player.playListIsEmpty())
                 player.musicaAnt();
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbAnteriorActionPerformed
 
@@ -279,11 +279,11 @@ public class TelaMiniPlayer extends javax.swing.JFrame {
             if(!player.playListIsEmpty())
                 player.proxMusica();
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaMiniPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbProximaActionPerformed
 

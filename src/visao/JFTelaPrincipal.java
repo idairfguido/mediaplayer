@@ -45,7 +45,7 @@ import util.Tempo;
  *
  * @author Idair F. Guido
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class JFTelaPrincipal extends javax.swing.JFrame {
 
     private MediaPlayer player;
     private GTableModel modeloTabela = new GTableModel();
@@ -59,7 +59,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private boolean musicas = true;
 
     /** Creates new form TelaPrincipal */
-    public TelaPrincipal(MediaPlayer player) {
+    public JFTelaPrincipal(MediaPlayer player) {
         this.player = player;
         setaIcon();
         initComponents();
@@ -73,13 +73,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel("com.nilo.plaf.nimrod.NimRODLookAndFeel");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         SwingUtilities.updateComponentTreeUI(this);
         jSplitPane1.setOneTouchExpandable(true);
@@ -288,7 +288,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         ));
         jtMusicas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jtMusicas.setRowHeight(20);
         jtMusicas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jtMusicasMouseReleased(evt);
@@ -610,7 +609,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jmArquivo.setText("Arquivo");
 
-        jmiAdicionar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jmiAdicionar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiAdicionar.setText("Adicionar");
         jmiAdicionar.setToolTipText("Adicionar Musicas a Biblioteca.");
         jmiAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -621,7 +620,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmArquivo.add(jmiAdicionar);
         jmArquivo.add(jSeparator1);
 
-        jmiPropriedades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jmiPropriedades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiPropriedades.setText("Propriedades");
         jmiPropriedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -631,7 +630,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmArquivo.add(jmiPropriedades);
         jmArquivo.add(jSeparator6);
 
-        jmiAddMusicasSelecionadas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
+        jmiAddMusicasSelecionadas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jmiAddMusicasSelecionadas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/visao/icones/6972_16x16.png"))); // NOI18N
         jmiAddMusicasSelecionadas.setText("Adicionar Musicas Selecionadas");
         jmiAddMusicasSelecionadas.addActionListener(new java.awt.event.ActionListener() {
@@ -642,7 +641,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmArquivo.add(jmiAddMusicasSelecionadas);
         jmArquivo.add(jSeparator7);
 
-        jmiLimpar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jmiLimpar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/visao/icones/exclui.png"))); // NOI18N
         jmiLimpar.setText("Limpar PlayList");
         jmiLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -652,7 +651,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmArquivo.add(jmiLimpar);
 
-        jmiSalvar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jmiSalvar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiSalvar.setText("Salvar PlayList");
         jmiSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -661,7 +660,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmArquivo.add(jmiSalvar);
 
-        jmiRenomear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jmiRenomear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiRenomear.setText("Renomear PlayList");
         jmiRenomear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -670,7 +669,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmArquivo.add(jmiRenomear);
 
-        jmiExcluir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        jmiExcluir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/visao/icones/3695_128x128.png"))); // NOI18N
         jmiExcluir.setText("Excluir PlayList");
         jmiExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -693,7 +692,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jmExecutar.setText("Executar");
 
-        jmiPlayPause.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SPACE, java.awt.event.InputEvent.CTRL_MASK));
+        jmiPlayPause.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SPACE, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiPlayPause.setText("Play / Pause");
         jmiPlayPause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -702,7 +701,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmExecutar.add(jmiPlayPause);
 
-        jmiStop.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_SPACE, java.awt.event.InputEvent.CTRL_MASK));
+        jmiStop.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_SPACE, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiStop.setText("Stop");
         jmiStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -711,7 +710,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmExecutar.add(jmiStop);
 
-        jmiProxima.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        jmiProxima.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiProxima.setText("Proxima Musica");
         jmiProxima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -720,7 +719,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmExecutar.add(jmiProxima);
 
-        jmiAnterior.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jmiAnterior.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiAnterior.setText("Musica Anterior");
         jmiAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -735,7 +734,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jmVolume.setText("Volume");
 
-        jmiAumentar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, java.awt.event.InputEvent.CTRL_MASK));
+        jmiAumentar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiAumentar.setText("Aumentar");
         jmiAumentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -744,7 +743,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmVolume.add(jmiAumentar);
 
-        jmiDiminuir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, java.awt.event.InputEvent.CTRL_MASK));
+        jmiDiminuir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiDiminuir.setText("Diminuir");
         jmiDiminuir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -756,7 +755,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmOpcoes.add(jmVolume);
         jmOpcoes.add(jSeparator4);
 
-        jcbmiSequencia.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        jcbmiSequencia.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jcbmiSequencia.setText("Sequencia");
         jcbmiSequencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -765,7 +764,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmOpcoes.add(jcbmiSequencia);
 
-        jcbmiAleatorio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
+        jcbmiAleatorio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jcbmiAleatorio.setText("Aleatório");
         jcbmiAleatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -774,7 +773,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmOpcoes.add(jcbmiAleatorio);
 
-        jcbmiRepetir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
+        jcbmiRepetir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jcbmiRepetir.setText("Repetir");
         jcbmiRepetir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -784,7 +783,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmOpcoes.add(jcbmiRepetir);
         jmOpcoes.add(jSeparator3);
 
-        jmiPreferencias.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jmiPreferencias.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiPreferencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/visao/icones/4970_128x128.png"))); // NOI18N
         jmiPreferencias.setText("Preferências");
         jmiPreferencias.addActionListener(new java.awt.event.ActionListener() {
@@ -795,7 +794,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmOpcoes.add(jmiPreferencias);
         jmOpcoes.add(jSeparator5);
 
-        jmiMiniPlayer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        jmiMiniPlayer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiMiniPlayer.setText("MiniPlayer");
         jmiMiniPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -809,7 +808,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmAjuda.setText("Ajuda");
         jmAjuda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem8.setText("Sobre");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -818,7 +817,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmAjuda.add(jMenuItem8);
 
-        jmiContAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jmiContAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiContAjuda.setText("Conteudo de Ajuda");
         jmiContAjuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -935,11 +934,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     player.play(posicao);
             }
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbPlayPauseActionPerformed
 
@@ -974,11 +973,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     int posicao = jtMusicasExecucao.getSelectedRow();
                     player.play(posicao);
                 } catch (UnsupportedAudioFileException ex) {
-                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
-                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (LineUnavailableException ex) {
-                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -989,11 +988,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if(player.isExecutando())
                 player.musicaAnt();
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbAnteriorActionPerformed
 
@@ -1002,11 +1001,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if(player.isExecutando())
                 player.proxMusica();
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbProximoActionPerformed
 
@@ -1073,9 +1072,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jlPrimeiraVez.setText("");
             }
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jmiAdicionarActionPerformed
 
@@ -1086,11 +1085,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 player.play(posicao);
             }
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jmiPlayPauseActionPerformed
 
@@ -1104,11 +1103,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if(!player.playListIsEmpty())
                 player.proxMusica();
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jmiProximaActionPerformed
 
@@ -1117,11 +1116,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if(!player.playListIsEmpty())
                 player.musicaAnt();
         } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jmiAnteriorActionPerformed
 

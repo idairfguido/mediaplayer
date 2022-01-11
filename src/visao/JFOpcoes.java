@@ -22,12 +22,12 @@ import visao.panels.AudioPane;
  *
  * @author Idair F. Guido
  */
-public class Opcoes extends javax.swing.JFrame {
+public class JFOpcoes extends javax.swing.JFrame {
     private MediaPlayer player;
 
 
     /** Creates new form Opcoes */
-    public Opcoes(MediaPlayer player) {
+    public JFOpcoes(MediaPlayer player) {
         setaIcon();
         initComponents();
         estanciaAudioPanel();
@@ -88,7 +88,7 @@ public class Opcoes extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,8 +101,8 @@ public class Opcoes extends javax.swing.JFrame {
                     .addComponent(jButton3)))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-498)/2, (screenSize.height-464)/2, 498, 464);
+        setSize(new java.awt.Dimension(498, 464));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
