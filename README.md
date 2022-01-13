@@ -1,2 +1,2 @@
 # mediaplayer
-Player de música
+Player de música em JAVA
