@@ -6,6 +6,9 @@
 package persistencia;
 
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Query;
 import controle.DaoDb4o;
 import java.util.List;
@@ -21,7 +24,7 @@ public class ListaDAO {
         try {
             DaoDb4o.conexao.store(playList);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -33,7 +36,7 @@ public class ListaDAO {
         consulta.constrain(playList);
         ObjectSet lista = consulta.execute();
         PlayList temp = null;
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             temp = (PlayList) lista.get(0);
             
             DaoDb4o.conexao.store(temp);
@@ -50,7 +53,7 @@ public class ListaDAO {
         consulta.descend("codigo").constrain(codigoPlayList).like();
         ObjectSet lista = consulta.execute();
         PlayList playList;
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             playList = (PlayList) lista.get(0);
             return true;
         } else {
@@ -63,7 +66,7 @@ public class ListaDAO {
         consulta.constrain(PlayList.class);
         consulta.descend("titulo").constrain(nome).like();
         ObjectSet result = consulta.execute();
-        if(result.size() > 0){
+        if(!result.isEmpty()){
             PlayList temp = (PlayList) result.get(0);
             return temp;
         }else{
@@ -76,7 +79,7 @@ public class ListaDAO {
         consulta.constrain(PlayList.class);
         consulta.descend("titulo").constrain(nome).like();
         ObjectSet result = consulta.execute();
-        if(result.size() > 0){
+        if(!result.isEmpty()){
             return true;
         }else{
             return false;
@@ -87,7 +90,7 @@ public class ListaDAO {
         try {
             DaoDb4o.conexao.delete(playList);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException | Db4oIOException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -98,7 +101,7 @@ public class ListaDAO {
         consulta.constrain(PlayList.class);
         consulta.descend(caracteristica).constrain(conteudo).like();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             List<PlayList> temp = lista;
             return temp;
         } else {
@@ -111,7 +114,7 @@ public class ListaDAO {
         consulta.constrain(PlayList.class);
         consulta.descend("codigo").orderAscending();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             PlayList playList = (PlayList) lista.get(0);
             return playList;
         } else {

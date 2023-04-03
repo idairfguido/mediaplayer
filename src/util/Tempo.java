@@ -84,7 +84,7 @@ public class Tempo {
         Map<String, String> propriedade = ((TAudioFileFormat) baseFileFormat).properties();
         ArrayList x = new ArrayList();
         x.add(propriedade.get("duration"));
-        return Long.parseLong(x.get(0).toString());
+        return Long.valueOf(x.get(0).toString());
     }
 
 }

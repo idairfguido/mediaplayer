@@ -20,7 +20,7 @@ public class ProcuraArquivo {
 
     private boolean multiSelecao = false;
     private File[] selecao;
-    private List<File> arquivos = new ArrayList<File>();
+    private List<File> arquivos = new ArrayList<>();
     private int opcao;
 
     public ProcuraArquivo() {
@@ -53,6 +53,7 @@ public class ProcuraArquivo {
     }
 
     private static class FiltroArquivo implements FileFilter {
+        @Override
         public boolean accept(File file) {
            return file.isDirectory() || file.getName().toLowerCase().endsWith(".mp3");
         }
@@ -61,12 +62,12 @@ public class ProcuraArquivo {
     private void verificaCaminho(File diretorio){
         if(diretorio == null){
             if(multiSelecao){
-                for (int i = 0; i < selecao.length; i++) {
-                    if(selecao[i].isFile()){
-                        arquivos.add(selecao[i]);
+                for (File selecao1 : selecao) {
+                    if (selecao1.isFile()) {
+                        arquivos.add(selecao1);
                     }
-                    if(selecao[i].isDirectory()){
-                        buscaArquivos(selecao[i]);
+                    if (selecao1.isDirectory()) {
+                        buscaArquivos(selecao1);
                     }
                 }
                 multiSelecao = false;
@@ -86,12 +87,11 @@ public class ProcuraArquivo {
 
     private void buscaArquivos(File pasta){
         File[]caminhosArquivos = pasta.listFiles(new FiltroArquivo());
-        for (int i = 0; i < caminhosArquivos.length; i++) {
-            if (caminhosArquivos[i].isDirectory()) {
-                buscaArquivos(caminhosArquivos[i]);
-
+        for (File caminhosArquivo : caminhosArquivos) {
+            if (caminhosArquivo.isDirectory()) {
+                buscaArquivos(caminhosArquivo);
             } else {
-                arquivos.add(caminhosArquivos[i]);
+                arquivos.add(caminhosArquivo);
             }
         }
     }

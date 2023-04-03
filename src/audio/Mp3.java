@@ -63,11 +63,7 @@ public class Mp3 {
                 aIOStream = din;
             }
             return true;
-        } catch (UnsupportedAudioFileException unsupportedAudioFileException) {
-            return false;
-        } catch (IOException iOException) {
-            return false;
-        } catch (LineUnavailableException lineUnavailableException) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
             return false;
         }
     }
@@ -75,21 +71,18 @@ public class Mp3 {
     /**
      * Start or continue the music
      *
-     * @param t
-     *            A auxiliary thread when play the music keep running the
-     *            program
+     * @throws java.io.IOException
+     * @throws javax.sound.sampled.LineUnavailableException
+     * @throws javax.sound.sampled.UnsupportedAudioFileException
      */
     public void play() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         try {
             start();
             aux.interrupt();
             aux = new Thread(
-                    new Runnable() {
-                        public void run() {
-                            rawplay();
-                        }
-                    }
-            );
+                    () -> {
+                        rawplay();
+            });
         } catch (Exception e) {
             this.fimMusica = true;
             System.out.println("fim da musica");
@@ -167,15 +160,14 @@ public class Mp3 {
 
     /**
      * If the SourceDataLine is already in stop continue playing.
+     * @throws javax.sound.sampled.UnsupportedAudioFileException
      */
     public void resume() throws UnsupportedAudioFileException {
         sDLine.start();
         flag = true;
         try {
             play();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
+        } catch (IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
     }

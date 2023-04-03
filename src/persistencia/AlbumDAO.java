@@ -6,6 +6,9 @@
 package persistencia;
 
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Query;
 import controle.DaoDb4o;
 import java.util.List;
@@ -21,7 +24,7 @@ public class AlbumDAO {
         try {
             DaoDb4o.conexao.store(album);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -33,7 +36,7 @@ public class AlbumDAO {
         consulta.constrain(album);
         ObjectSet lista = consulta.execute();
         Album temp = null;
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             temp = (Album) lista.get(0);
             
             DaoDb4o.conexao.store(temp);
@@ -49,7 +52,7 @@ public class AlbumDAO {
         consulta.constrain(Album.class);
         consulta.descend("titulo").constrain(album.getTitulo()).like();
         ObjectSet lista = consulta.execute();
-        if(lista.size() == 0){
+        if(lista.isEmpty()){
             return false;
         }else{
             return true;
@@ -60,7 +63,7 @@ public class AlbumDAO {
         try {
             DaoDb4o.conexao.delete(album);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException | Db4oIOException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -71,7 +74,7 @@ public class AlbumDAO {
         consulta.constrain(Album.class);
         consulta.descend(caracteristica).constrain(conteudo).like();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             List<Album> temp = lista;
             return temp;
         } else {
@@ -84,7 +87,7 @@ public class AlbumDAO {
         consulta.constrain(Album.class);
         consulta.descend("codigo").orderAscending();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             Album album = (Album) lista.get(0);
             return album;
         } else {
@@ -97,7 +100,7 @@ public class AlbumDAO {
         consulta.constrain(Album.class);
         consulta.descend("titulo").orderAscending();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             Album album = (Album) lista.get(0);
             return album;
         } else {

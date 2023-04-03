@@ -6,6 +6,9 @@
 package persistencia;
 
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Query;
 import controle.DaoDb4o;
 import java.util.List;
@@ -21,7 +24,7 @@ public class MusicaDAO {
         try {
             DaoDb4o.conexao.store(musica);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -33,7 +36,7 @@ public class MusicaDAO {
         consulta.constrain(musica);
         ObjectSet lista = consulta.execute();
         Musica temp = null;
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
 //            temp = (Musica) lista.get(0);
 //            temp.setAlbum(musica.getAlbum());
 //            temp.setArtista(musica.getArtista());
@@ -55,7 +58,7 @@ public class MusicaDAO {
         try {
             DaoDb4o.conexao.delete(musica);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException | Db4oIOException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -66,7 +69,7 @@ public class MusicaDAO {
         consulta.constrain(Musica.class);
         consulta.descend(caracteristica).constrain(conteudo).like();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             List<Musica> temp = lista;
             return temp;
         } else {
@@ -90,11 +93,7 @@ public class MusicaDAO {
         int porAlbum = lista2.size();
         int porTitulo = lista.size();
         int porNome = lista3.size();
-        if((porTitulo == 0) || (porAlbum == 0) || (porNome == 0)){
-            return false;
-        }else{
-            return true;
-        }
+        return !((porTitulo == 0) || (porAlbum == 0) || (porNome == 0));
     }
 
     public static Musica localizar(int codigo) {
@@ -102,7 +101,7 @@ public class MusicaDAO {
         consulta.constrain(Musica.class);
         consulta.descend("codigo").constrain(codigo).like();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             Musica musica = (Musica) lista.get(0);
             return musica;
         } else {
@@ -128,11 +127,7 @@ public class MusicaDAO {
         consulta.constrain(Musica.class);
         consulta.descend("codigo").orderAscending();
         ObjectSet lista = consulta.execute();
-        if (!lista.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return lista.isEmpty();
     }
 
     public static List<Musica> listaTodosPorTitulo() {

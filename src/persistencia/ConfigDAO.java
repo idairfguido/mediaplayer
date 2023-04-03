@@ -6,6 +6,9 @@
 package persistencia;
 
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Query;
 import controle.DaoDb4o;
 import util.Configuracoes;
@@ -20,7 +23,7 @@ public class ConfigDAO {
         try {
             DaoDb4o.conexao.store(config);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -32,7 +35,7 @@ public class ConfigDAO {
         consulta.constrain(config);
         ObjectSet lista = consulta.execute();
         Configuracoes temp = null;
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             temp = (Configuracoes) lista.get(0);
 
 //            temp.setAleatorio(config.isAleatorio());
@@ -53,7 +56,7 @@ public class ConfigDAO {
         try {
             DaoDb4o.conexao.delete(config);
             return true;
-        } catch (Exception e) {
+        } catch (DatabaseClosedException | DatabaseReadOnlyException | Db4oIOException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -64,7 +67,7 @@ public class ConfigDAO {
         consulta.constrain(Configuracoes.class);
         consulta.descend("numero").orderAscending();
         ObjectSet lista = consulta.execute();
-        if (lista.size() > 0) {
+        if (!lista.isEmpty()) {
             Configuracoes config = (Configuracoes) lista.get(0);
             return config;
         } else {

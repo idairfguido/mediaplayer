@@ -297,24 +297,17 @@ public class MediaPlayer {
     }
     
     private void atualizador(){
-        timer = new Thread(new Runnable() {
-            @SuppressWarnings({"static-access"})
-            public void run() {
-                while (continuar) {
+        timer = new Thread(() -> {
+            while (continuar) {
+                try {
                     try {
-                        try {
-                            atualizar();
-                        } catch (UnsupportedAudioFileException ex) {
-                            Logger.getLogger(MediaPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IOException ex) {
-                            Logger.getLogger(MediaPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (LineUnavailableException ex) {
-                            Logger.getLogger(MediaPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        timer.sleep(500);
-                    } catch (InterruptedException ex) {
+                        atualizar();
+                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
                         Logger.getLogger(MediaPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MediaPlayer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

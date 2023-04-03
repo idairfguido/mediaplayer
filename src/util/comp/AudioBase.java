@@ -1,7 +1,6 @@
 
 package util.comp;
 
-import	java.io.*;
 import	javax.sound.sampled.*;
 import org.tritonus.share.sampled.*;
 import static util.comp.AudioDebug.*;
@@ -263,37 +262,39 @@ public abstract class AudioBase implements LineListener {
 	int end = off+len;
 	int sampleSize = (lineFormat.getSampleSizeInBits() + 7) / 8;
 	int max = 0;
-	if (sampleSize == 1) {
-	    // 8-bit
-	    for ( ; off < end; off++) {
-		int sample = (byte) (b[off] + 128);
-		if (sample < 0) sample = -sample;
-		if (sample > max) max = sample;
-	    }
-	    lastLevel = max;
-	} else if (sampleSize == 2) {
-	    if (lineFormat.isBigEndian()) {
-		// 16-bit big endian
-		for ( ; off < end; off+=2) {
-		    int sample = (short) ((b[off]<<8) | (b[off+1] & 0xFF));
-		    if (sample < 0) sample = -sample;
-		    if (sample > max) max = sample;
-		}
-	    } else {
-		// 16-bit little endian
-		for ( ; off < end; off+=2) {
-		    int sample = (short) ((b[off+1]<<8) | (b[off] & 0xFF));
-		    if (sample < 0) sample = -sample;
-		    if (sample > max) max = sample;
-		}
-	    }
-	    //System.out.print("max="+max+" ");
-	    lastLevel = max >> 8;
-	    //System.out.print(":"+len+":");
-	    //System.out.print("[lL="+lastLevel+" "+getClass().toString()+"]");
-	} else {
-	    lastLevel = -1;
-	}
+        switch (sampleSize) {
+            case 1:
+                // 8-bit
+                for ( ; off < end; off++) {
+                    int sample = (byte) (b[off] + 128);
+                    if (sample < 0) sample = -sample;
+                    if (sample > max) max = sample;
+                }   lastLevel = max;
+                break;
+            case 2:
+                if (lineFormat.isBigEndian()) {
+                    // 16-bit big endian
+                    for ( ; off < end; off+=2) {
+                        int sample = (short) ((b[off]<<8) | (b[off+1] & 0xFF));
+                        if (sample < 0) sample = -sample;
+                        if (sample > max) max = sample;
+                    }
+                } else {
+                    // 16-bit little endian
+                    for ( ; off < end; off+=2) {
+                        int sample = (short) ((b[off+1]<<8) | (b[off] & 0xFF));
+                        if (sample < 0) sample = -sample;
+                        if (sample > max) max = sample;
+                    }
+                }   //System.out.print("max="+max+" ");
+                lastLevel = max >> 8;
+                //System.out.print(":"+len+":");
+                //System.out.print("[lL="+lastLevel+" "+getClass().toString()+"]");
+                break;
+            default:
+                lastLevel = -1;
+                break;
+        }
     }
 
     // silence this array

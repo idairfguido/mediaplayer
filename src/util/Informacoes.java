@@ -32,10 +32,9 @@ public class Informacoes {
     public static String getTitulo(File arquivo) throws UnsupportedAudioFileException, IOException{
         AudioFileFormat baseFileFormat = AudioSystem.getAudioFileFormat(arquivo);
         Map<String, String> propriedade = ((TAudioFileFormat) baseFileFormat).properties();
-        ArrayList x = new ArrayList();
         String titulo = propriedade.get("title");
         try {
-            if (titulo.equals(null) || titulo.equals("")) {
+            if (titulo == null || titulo.equals("")) {
                 int caracteres = arquivo.getName().length();
                 String t = arquivo.getName();
                 char[] a = t.toCharArray();
@@ -54,10 +53,9 @@ public class Informacoes {
     public static String getAlbum(File arquivo) throws UnsupportedAudioFileException, IOException{
         AudioFileFormat baseFileFormat = AudioSystem.getAudioFileFormat(arquivo);
         Map<String, String> propriedade = ((TAudioFileFormat) baseFileFormat).properties();
-        ArrayList x = new ArrayList();
         String album = propriedade.get("album");
         try {
-            if (album.equals(null) || album.equals("")) {
+            if (album == null || album.equals("")) {
                 album = "Desconhecido";
             }
         } catch (Exception e) {
@@ -69,11 +67,10 @@ public class Informacoes {
     public static String getAutor(File arquivo) throws UnsupportedAudioFileException, IOException{
         AudioFileFormat baseFileFormat = AudioSystem.getAudioFileFormat(arquivo);
         Map<String, String> propriedade = ((TAudioFileFormat) baseFileFormat).properties();
-        ArrayList x = new ArrayList();
         String autor = null;
         try {
             autor = propriedade.get("author");
-            if (autor.equals(null) || autor.equals("")) {
+            if (autor == null || autor.equals("")) {
                 autor = "Desconhecido";
             }
         } catch (Exception e) {

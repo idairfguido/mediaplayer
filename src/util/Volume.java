@@ -9,6 +9,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.CompoundControl;
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.Port;
 
@@ -36,9 +37,7 @@ public class Volume {
     try
     {
         volumeSearch:
-        for (int i = 0; i < mixerInfo.length; i++)
-        {
-            Mixer.Info info = mixerInfo[i];
+        for (Mixer.Info info : mixerInfo) {
             mixer = AudioSystem.getMixer(info);
             System.out.println("info.getName() = " + info.getName());
             if (mixer.isLineSupported(Port.Info.SPEAKER))
@@ -48,9 +47,7 @@ public class Volume {
                 lineOut.open();
                 Control[] controls = lineOut.getControls();
                 System.out.println("Supported controls on the speaker:");
-                for (int j = 0; j < controls.length; j++)
-                {
-                    Control control = controls[j];
+                for (Control control : controls) {
                     // in the case of Vista, here you can get access to the volume control
                     // of the program, which appears to be equivalent to a "Wave" control in XP,
                     // except that you get it just for this app.
@@ -58,8 +55,7 @@ public class Volume {
                     // the actual control.
                     // furthermore, in vista the Master is a compound control, but just "volume"
                     // refers to a single app. (I think).
-
-                    if (System.getProperty("os.name").toLowerCase().contains("vista")){
+                    if (System.getProperty("os.name").toLowerCase().contains("vista")) {
                         System.out.println("Vista");
                         if (control.getType().toString().toLowerCase().startsWith("volume")){
                             if (control instanceof FloatControl){
@@ -67,14 +63,14 @@ public class Volume {
                                 break volumeSearch;
                             }
                         }
-                    }else{
+                    } else {
                         System.out.println("Outro");
                         if (control.getType().toString().toUpperCase().contains("WAVE"))
                         {
-                            if (control instanceof CompoundControl)
+                            if (control instanceof CompoundControl compoundControl)
                             {
                                 System.out.println("CompoundControl");
-                                CompoundControl waveControl = (CompoundControl) control;
+                                CompoundControl waveControl = compoundControl;
                                 Control[] wControls = waveControl.getMemberControls();
                                 for (Control c : wControls)
                                 {
@@ -97,7 +93,7 @@ public class Volume {
                 }
             }
         }
-    } catch (Exception e)
+    } catch (LineUnavailableException e)
     {
         System.err.println("There was an error while trying to get a volume control");
         e.printStackTrace();
