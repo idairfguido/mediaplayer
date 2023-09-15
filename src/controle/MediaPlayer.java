@@ -69,6 +69,7 @@ public class MediaPlayer {
     }
 
     private boolean estanciaMusica(int nroMUsica) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        System.out.println("Play: "+musica.toString());
         if (nroMUsica >= 0) {
             musica = playlist.get(nroMUsica);
             nroMusicaExecutando = nroMUsica;

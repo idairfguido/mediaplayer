@@ -10,7 +10,6 @@
  */
 package visao;
 
-import persistencia.Banco;
 import controle.MediaPlayer;
 import java.awt.Desktop;
 import java.awt.Image;

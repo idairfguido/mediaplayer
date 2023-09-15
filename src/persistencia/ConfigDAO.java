@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package persistencia;
 
 import com.db4o.ObjectSet;
@@ -18,59 +17,78 @@ import util.Configuracoes;
  */
 public class ConfigDAO {
 
+    private static final int USE_CACHE = 0;
+    private static final int USE_DB4O = 1;
+    private static final int USE = USE_CACHE;
+
     public static boolean inserir(Configuracoes config) {
-        try {
-            Banco.conexao().store(config);
-            return true;
-        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
-            System.out.println(e.getMessage());
-            return false;
+        if (USE == USE_CACHE) {
+            return Cache.getInstance().insert(config);
+        } else {
+            try {
+                Banco.conexao().store(config);
+                return true;
+            } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
         }
     }
 
     public static boolean alterar(Configuracoes config) {
-        Query consulta = Banco.conexao().query();
-        consulta.constrain(Configuracoes.class);
-        consulta.constrain(config);
-        ObjectSet lista = consulta.execute();
-        Configuracoes temp = null;
-        if (!lista.isEmpty()) {
-            temp = (Configuracoes) lista.get(0);
+        if (USE == USE_CACHE) {
+            return Cache.getInstance().insert(config);
+        } else {
+            Query consulta = Banco.conexao().query();
+            consulta.constrain(Configuracoes.class);
+            consulta.constrain(config);
+            ObjectSet lista = consulta.execute();
+            Configuracoes temp = null;
+            if (!lista.isEmpty()) {
+                temp = (Configuracoes) lista.get(0);
 
 //            temp.setAleatorio(config.isAleatorio());
 //            temp.setNumero(config.getNumero());
 //            temp.setRepetir(config.isRepetir());
 //            temp.setSequencia(config.isSequencia());
 //            temp.setUltimaPlayListExecutada(config.getUltimaPlayListExecutada());
-            
-            Banco.conexao().store(temp);
-            return true;
-        } else {
+                Banco.conexao().store(temp);
+                return true;
+            } else {
 
-            return false;
+                return false;
+            }
         }
     }
 
     public static boolean excluir(Configuracoes config) {
-        try {
-            Banco.conexao().delete(config);
-            return true;
-        } catch (DatabaseClosedException | DatabaseReadOnlyException | Db4oIOException e) {
-            System.out.println(e.getMessage());
-            return false;
+        if (USE == USE_CACHE) {
+            return Cache.getInstance().insert(config);
+        } else {
+            try {
+                Banco.conexao().delete(config);
+                return true;
+            } catch (DatabaseClosedException | DatabaseReadOnlyException | Db4oIOException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
         }
     }
 
     public static Configuracoes localizar(int codigo) {
-        Query consulta = Banco.conexao().query();
-        consulta.constrain(Configuracoes.class);
-        consulta.descend("numero").orderAscending();
-        ObjectSet lista = consulta.execute();
-        if (!lista.isEmpty()) {
-            Configuracoes config = (Configuracoes) lista.get(0);
-            return config;
+        if (USE == USE_CACHE) {
+            return new Configuracoes();
         } else {
-            return null;
+            Query consulta = Banco.conexao().query();
+            consulta.constrain(Configuracoes.class);
+            consulta.descend("numero").orderAscending();
+            ObjectSet lista = consulta.execute();
+            if (!lista.isEmpty()) {
+                Configuracoes config = (Configuracoes) lista.get(0);
+                return config;
+            } else {
+                return null;
+            }
         }
     }
 
