@@ -1,11 +1,11 @@
-package modelo;
+package visao.componentes;
 
 
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import persistencia.AlbumDAO;
+import modelo.Musica;
 
 /*
  * To change this template, choose Tools | Templates
@@ -16,16 +16,13 @@ import persistencia.AlbumDAO;
  *
  * @author Idair F. Guido
  */
-public class ETableModel implements TableModel{
+public class ITableModel implements TableModel{
     private List<Musica> listaObjetos = new LinkedList<Musica>();
     List<String> listaColunas = new LinkedList<String>();
     List<TableModelListener> listaMusicas = new LinkedList<TableModelListener>();
 
-    public ETableModel() {
-        listaColunas.add("Titulo");
-        listaColunas.add("Artista");
-        listaColunas.add("Album");
-        listaColunas.add("Duracao");
+    public ITableModel() {
+        listaColunas.add("Informações");
     }
 
     public int getRowCount() {
@@ -52,10 +49,6 @@ public class ETableModel implements TableModel{
         if(columnIndex == 0)
             return getListaObjetos().get(rowIndex).getTitulo();
         if(columnIndex == 1)
-            return getListaObjetos().get(rowIndex).getArtista();
-        if(columnIndex == 2)
-            return getListaObjetos().get(rowIndex).getAlbum();
-        if(columnIndex == 3)
             return getListaObjetos().get(rowIndex).getDuração();
         else
             return null;
@@ -66,10 +59,6 @@ public class ETableModel implements TableModel{
         if(columnIndex == 0)
             getListaObjetos().get(rowIndex).setTitulo(dado);
         if(columnIndex == 1)
-            getListaObjetos().get(rowIndex).setArtista(dado);
-        if(columnIndex == 2)
-            getListaObjetos().get(rowIndex).setAlbum(dado);
-        if(columnIndex == 3)
             getListaObjetos().get(rowIndex).setDuração(dado);
     }
 
@@ -101,13 +90,5 @@ public class ETableModel implements TableModel{
      */
     public List<Musica> getListaObjetos() {
         return listaObjetos;
-    }
-
-    public Musica getMusica(int posicao){
-        return listaObjetos.get(posicao);
-    }
-
-    public void removeAllElements(){
-        listaObjetos = new LinkedList<Musica>();
     }
 }

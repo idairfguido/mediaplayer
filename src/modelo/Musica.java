@@ -6,12 +6,13 @@
 package modelo;
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  *
  * @author Idair F. Guido
  */
-public class Musica {
+public class Musica implements Serializable{
 
     private String titulo, qualidade, formato, duração, artista, album, nome;
     private Long tempo;

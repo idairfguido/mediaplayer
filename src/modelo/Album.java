@@ -4,11 +4,13 @@
  */
 package modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Idair F. Guido
  */
-public class Album {
+public class Album implements Serializable{
 
     private String titulo, artista;
     private int codigo;

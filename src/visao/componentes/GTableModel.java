@@ -1,12 +1,11 @@
-package modelo;
+package visao.componentes;
 
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import persistencia.AlbumDAO;
+import modelo.Musica;
 
 /*
  * To change this template, choose Tools | Templates
@@ -17,15 +16,18 @@ import persistencia.AlbumDAO;
  *
  * @author Idair F. Guido
  */
-public class GTableModelAlbuns implements TableModel{
-    private List<Album> listaObjetos = new LinkedList<Album>();
+public class GTableModel implements TableModel{
+    private List<Musica> listaObjetos = new LinkedList<Musica>();
     List<String> listaColunas = new LinkedList<String>();
     List<TableModelListener> listaMusicas = new LinkedList<TableModelListener>();
 
-    public GTableModelAlbuns() {
-        listaColunas.add("Codigo");
+    public GTableModel() {
         listaColunas.add("Titulo");
+        listaColunas.add("Album");
         listaColunas.add("Artista");
+        listaColunas.add("Nome");
+        listaColunas.add("Duracao");
+        listaColunas.add("Qualidade");
     }
 
     public int getRowCount() {
@@ -50,11 +52,17 @@ public class GTableModelAlbuns implements TableModel{
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         if(columnIndex == 0)
-            return getListaObjetos().get(rowIndex).getCodigo();
-        if(columnIndex == 1)
             return getListaObjetos().get(rowIndex).getTitulo();
+        if(columnIndex == 1)
+            return getListaObjetos().get(rowIndex).getAlbum();
         if(columnIndex == 2)
             return getListaObjetos().get(rowIndex).getArtista();
+        if(columnIndex == 3)
+            return getListaObjetos().get(rowIndex).getNome();
+        if(columnIndex == 4)
+            return getListaObjetos().get(rowIndex).getDuração();
+        if(columnIndex == 5)
+            return getListaObjetos().get(rowIndex).getQualidade();
         else
             return null;
     }
@@ -62,12 +70,17 @@ public class GTableModelAlbuns implements TableModel{
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         String dado = aValue.toString();
         if(columnIndex == 0)
-            getListaObjetos().get(rowIndex).setCodigo(Integer.parseInt(dado));
-        if(columnIndex == 1)
             getListaObjetos().get(rowIndex).setTitulo(dado);
+        if(columnIndex == 1)
+            getListaObjetos().get(rowIndex).setAlbum(dado);
         if(columnIndex == 2)
             getListaObjetos().get(rowIndex).setArtista(dado);
-       
+        if(columnIndex == 3)
+            getListaObjetos().get(rowIndex).setNome(dado);
+        if(columnIndex == 4)
+            getListaObjetos().get(rowIndex).setDuração(dado);
+        if(columnIndex == 5)
+            getListaObjetos().get(rowIndex).setQualidade(dado);
     }
 
     public void addTableModelListener(TableModelListener l) {
@@ -82,29 +95,30 @@ public class GTableModelAlbuns implements TableModel{
         this.listaColunas = listaColunas;
     }
 
-    public void addObjeto(Album album){
-        getListaObjetos().add(album);
+    public void addObjeto(Musica musica){
+        getListaObjetos().add(musica);
     }
 
     /**
      * @param listaObjetos the listaObjetos to set
      */
-    public void setListaObjetos(List<Album> listaObjetos) {
+    public void setListaObjetos(List<Musica> listaObjetos) {
         this.listaObjetos = listaObjetos;
     }
 
     /**
      * @return the listaObjetos
      */
-    public List<Album> getListaObjetos() {
+    public List<Musica> getListaObjetos() {
         return listaObjetos;
     }
 
     public void removeAllElements(){
-        listaObjetos = new LinkedList<Album>();
+        listaObjetos = new LinkedList<Musica>();
     }
 
-    public Album getObjeto(int index){
+    public Musica getObjeto(int index){
         return listaObjetos.get(index);
     }
+
 }

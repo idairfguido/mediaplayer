@@ -10,7 +10,6 @@ import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
 import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Query;
-import controle.DaoDb4o;
 import util.Configuracoes;
 
 /**
@@ -21,7 +20,7 @@ public class ConfigDAO {
 
     public static boolean inserir(Configuracoes config) {
         try {
-            DaoDb4o.conexao.store(config);
+            Banco.conexao().store(config);
             return true;
         } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             System.out.println(e.getMessage());
@@ -30,7 +29,7 @@ public class ConfigDAO {
     }
 
     public static boolean alterar(Configuracoes config) {
-        Query consulta = DaoDb4o.conexao.query();
+        Query consulta = Banco.conexao().query();
         consulta.constrain(Configuracoes.class);
         consulta.constrain(config);
         ObjectSet lista = consulta.execute();
@@ -44,7 +43,7 @@ public class ConfigDAO {
 //            temp.setSequencia(config.isSequencia());
 //            temp.setUltimaPlayListExecutada(config.getUltimaPlayListExecutada());
             
-            DaoDb4o.conexao.store(temp);
+            Banco.conexao().store(temp);
             return true;
         } else {
 
@@ -54,7 +53,7 @@ public class ConfigDAO {
 
     public static boolean excluir(Configuracoes config) {
         try {
-            DaoDb4o.conexao.delete(config);
+            Banco.conexao().delete(config);
             return true;
         } catch (DatabaseClosedException | DatabaseReadOnlyException | Db4oIOException e) {
             System.out.println(e.getMessage());
@@ -63,7 +62,7 @@ public class ConfigDAO {
     }
 
     public static Configuracoes localizar(int codigo) {
-        Query consulta = DaoDb4o.conexao.query();
+        Query consulta = Banco.conexao().query();
         consulta.constrain(Configuracoes.class);
         consulta.descend("numero").orderAscending();
         ObjectSet lista = consulta.execute();

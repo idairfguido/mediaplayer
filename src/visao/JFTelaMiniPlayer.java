@@ -11,13 +11,10 @@
 
 package visao;
 
-import controle.DaoDb4o;
+import persistencia.Banco;
 import controle.MediaPlayer;
-import util.Volume;
 import java.awt.Image;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
@@ -213,7 +210,7 @@ public class JFTelaMiniPlayer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        DaoDb4o.desconectar();
+//        Banco.disconect();
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
